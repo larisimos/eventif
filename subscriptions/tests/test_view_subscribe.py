@@ -1,8 +1,10 @@
+
 from django.test import TestCase
 from django.core import mail
 from subscriptions.forms import SubscriptionForm
 from subscriptions.models import Subscription
 from django.shortcuts import resolve_url as r
+
 
 
 class SubscribeGet(TestCase):
@@ -21,8 +23,8 @@ class SubscribeGet(TestCase):
             ('<form', 1),
             ('<input', 6),
             ('type="text"', 3),
-            ('type="email"', 1),
-            ('type="submit"', 1)
+            ('type="email"',1),
+            ('type="submit"',1)
         )
         for text, count in tags:
             with self.subTest():
@@ -36,10 +38,10 @@ class SubscribePostValid(TestCase):
     def setUp(self):
         data = dict(name="Cleber Fonseca", cpf='12345678901',
                     email='profcleberfonseca@gmail.com', phone='53-12345-6789')
-        self.resp = self.client.post(r('subscriptions:new'), data)
+        self.resp = self.client.post(r('subscriptions:new'),data)
 
     def test_post(self):
-        self.assertRedirects(self.resp, r('subscriptions:detail', 1))
+        self.assertRedirects(self.resp, r('subscriptions:detail',1))
 
     def test_send_subscription_email(self):
         self.assertEqual(1, len(mail.outbox))
