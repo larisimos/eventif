@@ -1,4 +1,3 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -36,25 +35,7 @@
 	<body>
 
         <div class="header-frame header-frame-absolute  row">
-            <header class="header header-inline min-h-3 row desktop-12 container" role="banner">
-
-                <div class="site-logo">
-                    <h1><a href="{%url 'home'%}" rel="home">EventIF</a></h1>
-                    <p class="site-description screen-reader-only">O maior encontro dos IFs do mundo!</p>
-                </div>
-
-                <nav class="nav-inline" role="navigation">
-                    <a href="javascript:void(0);" class="nav-mobile"><i class="fa fa-bars"></i></a>
-                    <ul>
-                        <li><a data-scroll href="/contato">Contato</a></li>
-                        <li><a data-scroll href="{%url 'home'%}#overview">Conferência</a></li>
-                        <li><a data-scroll href="{%url 'home'%}#sponsors">Patrocinadores</a></li>
-                        <li><a data-scroll href="{%url 'home'%}#register">Inscrição</a></li>
-                        <li><a data-scroll href="{%url 'home'%}#venue">Local</a></li>
-                    </ul>
-                </nav>
-
-            </header>
+            {% include 'nav.html' only %}
         </div>
 
       	<!-- TOP -->
@@ -71,7 +52,19 @@
             	<i class="fa fa-5x fa-globe"></i>
             	<h2>A Conferência</h2>
                 <p class="lead">A maior reunião de hackers do mundo.<br>Reunindo profissionais e entusiastas dos quatro <br>cantos do planeta, o <em>EventIF</em> é o lugar onde você precisa estar.</p>
-            	<p><a class="btn-basic btn-green" data-scroll href="{%url 'home'%}#register">Garanta a sua vaga!</a></p>
+            	<p><a class="btn-basic btn-green" data-scroll href="#register">Garanta a sua vaga!</a></p>
+            </div>
+        </section>
+
+        <section id="speakers">
+            <div class="speakers text-align-center row desktop-8 padding-bottom-2 container">
+                <h2>Palestrantes Convidados</h2>
+                {% for speaker in speakers %}
+                <div class="desktop-4">
+                    <img src="{{ speaker.photo }}">
+                    <h4>{{ speaker.name }}</h4>
+                </div>
+                {% endfor %}
             </div>
         </section>
 
@@ -112,7 +105,7 @@
                 <div class="text-align-center row desktop-12 padding-top-2 min-h-14 container">
                 	<h2>Inscrição</h2>
                 	<h3>Inscrições abertas!</h3>
-                	<a class="btn-basic btn-green" href="{%url 'subscriptions:new'%}">Inscreva-se Já!</a>
+                	<a class="btn-basic btn-green" href="{% url 'subscriptions:new' %}">Inscreva-se Já!</a>
                 </div>
             </div>
         </section>
